@@ -1,0 +1,61 @@
+<mvc:View controllerName="com.sap.uitable.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:ui="sap.ui.table">
+    <Page id="page" title="{i18n>title}">
+    <headerContent>
+    <Button id="idBtn" text="Customer List" press="onPressToOtherApp"/>
+    </headerContent>
+        <content>
+            <Panel headerText="Table Editable" expandable="true" expanded="false">
+                <ui:Table rows="{ViewModel>/CustomersResults}" selectionMode="MultiToggle" visibleRowCount="7" paste="onPaste" ariaLabelledBy="title">
+                    <ui:columns>
+                        <ui:Column >
+                            <Label text="Customer ID" />
+                            <ui:template>
+                                <Text text="{ViewModel>CustomerID}" wrapping="true" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column >
+                            <Label text="Company Name" />
+                            <ui:template>
+                                <Text text="{ViewModel>CompanyName}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column >
+                            <Label text="Contact Name" />
+                            <ui:template>
+                                <Text text="{ViewModel>ContactName}" wrapping="true" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column >
+                            <Label text="Contact Title" />
+                            <ui:template>
+                                <Text text="{ViewModel>ContactTitle}" wrapping="true" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column >
+                            <Label text="Address" />
+                            <ui:template>
+                                <Text text="{ViewModel>Address}" wrapping="true" />
+                            </ui:template>
+                        </ui:Column>
+                    </ui:columns>
+                </ui:Table>
+            </Panel>
+            <Panel headerText="Table Editable" expandable="true" expanded="false">
+
+                <ui:Table id="idUiTableDynamic" selectionMode="MultiToggle" visibleRowCount="7">
+                    <ui:extension>
+                        <OverflowToolbar>
+                            <ToolbarSpacer />
+                            <Button id="EditBtn" press="onEditSavePress" text="{= ${ViewModel>/mtablemode} === 'display' ? 'Edit' : 'Save'}" tooltip="{= ${ViewModel>/mtablemode} === 'display' ? 'Edit' : 'Save'}"/>
+                            <Button id="AddRowBtn" press="onAddRowPress" text="AddRow" tooltip="AddRow" visible="false"/>
+                        </OverflowToolbar>
+                    </ui:extension>
+
+                </ui:Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>
