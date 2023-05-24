@@ -86,14 +86,34 @@ sap.ui.define([
 
                 }
             },
-            onPressToOtherApp:function(oEvt) {
+            onPressToOtherApp: function (oEvt) {
                 // Navitgate to customerlist App
-               
+
                 var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation"); // get a handle on the global XAppNav service
                 var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
                     target: {
                         semanticObject: "customerlist",
                         action: "display"
+                    }
+
+                })) || ""; // generate the Hash to display a Supplier
+                oCrossAppNavigator.toExternal({
+                    target: {
+                        shellHash: hash
+                    }
+                }); // navigate to customers application
+            },
+            onCustomerPress: function (oEvt) {
+                // Navitgate to customerlist App
+
+                var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation"); // get a handle on the global XAppNav service
+                var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
+                    target: {
+                        semanticObject: "customerlist",
+                        action: "display"
+                    },
+                    params: {
+                        customer: oEvt.getSource().getText()
                     }
 
                 })) || ""; // generate the Hash to display a Supplier

@@ -13,7 +13,8 @@
                         <ui:Column >
                             <Label text="Customer ID" />
                             <ui:template>
-                                <Text text="{ViewModel>CustomerID}" wrapping="true" />
+                                <!-- <Text text="{ViewModel>CustomerID}" wrapping="true" /> -->
+                                <Link text="{ViewModel>CustomerID}" wrapping="true" press="onCustomerPress"/>
                             </ui:template>
                         </ui:Column>
                         <ui:Column >
