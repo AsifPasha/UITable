@@ -105,6 +105,7 @@ sap.ui.define([
             },
             onCustomerPress: function (oEvt) {
                 // Navitgate to customerlist App
+                debugger;
 
                 var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation"); // get a handle on the global XAppNav service
                 var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
@@ -114,6 +115,7 @@ sap.ui.define([
                     },
                     params: {
                         customer: oEvt.getSource().getText()
+                        // ,contactName: oEvt.getSource().getBindingContext("ViewModel").getObject().ContactName
                     }
 
                 })) || ""; // generate the Hash to display a Supplier
