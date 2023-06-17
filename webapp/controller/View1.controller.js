@@ -97,11 +97,13 @@ sap.ui.define([
                     }
 
                 })) || ""; // generate the Hash to display a Supplier
-                oCrossAppNavigator.toExternal({
-                    target: {
-                        shellHash: hash
-                    }
-                }); // navigate to customers application
+                // oCrossAppNavigator.toExternal({
+                //     target: {
+                //         shellHash: hash
+                //     }
+                // }); // navigate to customers application
+                var sUrl = window.location.href.split("#")[0] + hash;
+                sap.m.URLHelper.redirect(sUrl,true);
             },
             onCustomerPress: function (oEvt) {
                 // Navitgate to customerlist App
@@ -119,11 +121,17 @@ sap.ui.define([
                     }
 
                 })) || ""; // generate the Hash to display a Supplier
-                oCrossAppNavigator.toExternal({
-                    target: {
-                        shellHash: hash
-                    }
-                }); // navigate to customers application
+
+                // To open the new app in same tab
+                // oCrossAppNavigator.toExternal({
+                //     target: {
+                //         shellHash: hash
+                //     }
+                // }); // navigate to customers application
+
+                // To Open the new APP in different tab
+                var sUrl = window.location.href.split("#")[0] + hash;
+                sap.m.URLHelper.redirect(sUrl,true);
             }
         });
     });
