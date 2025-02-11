@@ -1,0 +1,77 @@
+<mvc:View controllerName="com.sap.uitable.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:ui="sap.ui.table">
+    <Page id="page" title="{i18n>title}">
+    <headerContent>
+    <Button id="idBtn" text="Customer List" press="onPressToOtherApp"/>
+    </headerContent>
+    <content>
+           
+             <Panel id="idpaneledit" headerText="UI Table" expandable="true" expanded="false">
+                <ui:Table id="idtbleedit" rows="{ViewModel>/CustomersResults}" selectionMode="MultiToggle" paste="onPaste" ariaLabelledBy="title">
+                    <ui:columns>
+                        <ui:Column id="idcolcustid">
+                            <Label id="idlblcustid" text="Customer ID" />
+                            <ui:template>
+                                <!-- <Text text="{ViewModel>CustomerID}" wrapping="true" /> -->
+                                <Link id="idlinkcutomer" text="{ViewModel>CustomerID}" wrapping="true" press="onCustomerPress"/>
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="idcolcommnameid">
+                            <Label id="idlblcommnameid" text="Company Name" />
+                            <ui:template>
+                                <Text id="idtxtcommnameid" text="{ViewModel>CompanyName}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="idcolcontactnamet">
+                            <Label id="idlblcontactnamet" text="Contact Name" />
+                            <ui:template>
+                                <Text id="idtxtcontactnamet" text="{ViewModel>ContactName}" wrapping="true" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="idcolcontacttitle">
+                            <Label id="idlblcontacttitle" text="Contact Title" />
+                            <ui:template>
+                                <Text id="idtxtcontacttitle" text="{ViewModel>ContactTitle}" wrapping="true" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="idcoladdress">
+                            <Label id="idlbladdress" text="Address" />
+                            <ui:template>
+                                <Text id="idtxtaddress" text="{ViewModel>Address}" wrapping="true" />
+                            </ui:template>
+                        </ui:Column>
+                    </ui:columns>
+                </ui:Table>
+            </Panel> 
+            <Panel id="idpaneldynamic" headerText="Customers UI Table" expandable="true" expanded="false">
+                <ui:Table id="idUiTableDynamic" selectionMode="MultiToggle" >
+                    <ui:extension>
+                        <OverflowToolbar id="iddynamicoverflw">
+                            <ToolbarSpacer id="idtablespacer" />
+                            <Button id="EditBtn" press="onEditSavePress" text="{= ${ViewModel>/mtablemode} === 'display' ? 'Edit' : 'Save'}" tooltip="{= ${ViewModel>/mtablemode} === 'display' ? 'Edit' : 'Save'}"/>
+                            <Button id="AddRowBtn" press="onAddRowPress" text="AddRow" tooltip="AddRow" visible="false"/>
+                        </OverflowToolbar>
+                    </ui:extension>
+
+                </ui:Table>
+            </Panel>
+           
+            <Panel id="idpanelEmployee" headerText="Employees UI Table" expandable="true" expanded="false">
+                <ui:Table id="idUiTableEmployee" selectionMode="MultiToggle" >
+                    <ui:extension>
+                        <OverflowToolbar id="iddynamicoverflwemp">
+                            <ToolbarSpacer id="idtablespaceremp" />
+                            <Button id="EditBtnemp" press="onEditSavePress" text="{= ${EmployeeModel>/mtablemode} === 'display' ? 'Edit' : 'Save'}" tooltip="{= ${EmployeeModel>/mtablemode} === 'display' ? 'Edit' : 'Save'}"/>
+                            <Button id="AddRowBtnemp" press="onAddRowPress" text="AddRow" tooltip="AddRow" visible="false"/>
+                        </OverflowToolbar>
+                    </ui:extension>
+
+                </ui:Table>
+            </Panel>
+            
+          
+    </content>
+    </Page>
+</mvc:View>
