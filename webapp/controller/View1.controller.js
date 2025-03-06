@@ -8,8 +8,8 @@ sap.ui.define([
 var oController = this;
     return BaseController.extend("com.sap.uitable.controller.View1", {
         onInit() {
-            this._LoadEmployeeData();
-            return;
+            // this._LoadEmployeeData();
+            // return;
             var oJsonModel = new JSONModel({
                 mtablemode: "display",
                 ColumnsResults: [],
@@ -31,7 +31,7 @@ var oController = this;
                         }
                         this.getView().getModel("ViewModel").setProperty("/ColumnsResults", aColumnData);
                         oJsonModel.setProperty("/CustomersResults", oData.results);
-                        // this._dynmicBindTable("display","idUiTableDynamic","ViewModel","CustomersResults","ColumnsResults");
+                        this._dynmicBindTable("display","idUiTableDynamic","ViewModel","CustomersResults","ColumnsResults");
                     }
                 },
                 error: (oError) => {
@@ -39,23 +39,26 @@ var oController = this;
                 }
             });
            
-            // this._dynmicBindTable("display","idUiTableEmployee","EmployeeModel","EmployeeResults","ColumnsResults");
+            // this._dynmicBindTable("display","idUiTableDynamic","ViewModel","CustomersResults","ColumnsResults");
+            this._LoadEmployeeData();
+         
 
         },
-        _dynmicBindTable: function (smode,id,oModel,rowBind,colBind) {
-            debugger;
-            var oTable = this.getView().byId(id);
-            oTable.setModel(this.getView().getModel(oModel));
-            oTable.bindRows("/" +rowBind);
+        // _dynmicBindTable: function (smode,id,oModel,rowBind,colBind) {
+        //     // debugger;
+        //     var oTable = this.getView().byId(id);
+        //     oTable.setModel(this.getView().getModel(oModel));
+        //     oTable.bindRows("/" +rowBind);
 
-            oTable.bindColumns("/"+colBind, function (sId, oContext) {
-                var oColumn = oContext.getObject();
-                var oTemplate = this._getTemplate(smode, oColumn);
-                return new Column({
-                    label: oColumn.colProperty,
-                    template: oTemplate
-                });
-            }.bind(this));
+        //     oTable.bindColumns("/"+colBind, function (sId, oContext) {
+        //         var oColumn = oContext.getObject();
+        //         var oTemplate = this._getTemplate(smode, oColumn);
+        //         // Create a new column for the table with the specified properties
+        //         return new Column({
+        //             label: oColumn.colProperty,
+        //             template: oTemplate
+        //         });
+        //     }.bind(this));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
             // var oTable = this.getView().byId("idUiTableDynamic");
@@ -103,19 +106,19 @@ var oController = this;
             //     }
             // });
             /////////////////////////////////////////////////////////////////////////////////////////
-        },
-        _getTemplate: (sMode, oColumn ) => {
-            if (sMode === "display" || (sMode === "Edit" && oColumn.colProperty == "CustomerID")) {
-                return new sap.m.Text({
-                    text: "{" + oColumn.colProperty + "}",
-                    wrapping: true
-                });
-            } else if (sMode === "Edit" && oColumn.colProperty !== "CustomerID") {
-                return new sap.m.Input({
-                    value: "{" + oColumn.colProperty + "}"
-                });
-            };
-        },
+        // },
+        // _getTemplate: (sMode, oColumn ) => {
+        //     if (sMode === "display" || (sMode === "Edit" && oColumn.colProperty == "CustomerID")) {
+        //         return new sap.m.Text({
+        //             text: "{" + oColumn.colProperty + "}",
+        //             wrapping: true
+        //         });
+        //     } else if (sMode === "Edit" && oColumn.colProperty !== "CustomerID") {
+        //         return new sap.m.Input({
+        //             value: "{" + oColumn.colProperty + "}"
+        //         });
+        //     };
+        // },
         onEditSavePress: function (oEvt) {
         if (oEvt.getSource().getText() === "Edit") {
             this.getView().getModel("ViewModel").setProperty("/mtablemode", "Edit");

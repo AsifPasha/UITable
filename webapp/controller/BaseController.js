@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
-], (Controller,JSONModel) => {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/table/Column",
+], (Controller,JSONModel,Column) => {
     "use strict";
 var oController = this;
     return Controller.extend("com.sap.uitable.controller.BaseController", {
@@ -41,33 +42,33 @@ var oController = this;
         });
          
         },
-        // _dynmicBindTable: function (smode,id,oModel,rowBind,colBind) {
+        _dynmicBindTable: function (smode,id,oModel,rowBind,colBind) {
+            // debugger;
+            var oTable = this.getView().byId(id);
+            oTable.setModel(this.getView().getModel(oModel));
+            oTable.bindRows("/" +rowBind);
 
-        //     var oTable = this.getView().byId(id);
-        //     var oTableModel = this.getView().getModel(oModel);
-        //     oTable.setModel(oTableModel);
-        //     oTable.bindRows("/" +rowBind);
-
-        //     oTable.bindColumns("/"+colBind, function (sId, oContext) {
-        //         var oColumn = oContext.getObject();
-        //         var oTemplate = this._getTemplate(smode, oColumn);
-        //         return new Column({
-        //             label: oColumn.colProperty,
-        //             template: oTemplate
-        //         });
-        //     }.bind(this));
-        // },
-        // _getTemplate: (sMode, oColumn ) => {
-        //     if (sMode === "display" || (sMode === "Edit" && oColumn.colProperty == "CustomerID")) {
-        //         return new sap.m.Text({
-        //             text: "{" + oColumn.colProperty + "}",
-        //             wrapping: true
-        //         });
-        //     } else if (sMode === "Edit" && oColumn.colProperty !== "CustomerID") {
-        //         return new sap.m.Input({
-        //             value: "{" + oColumn.colProperty + "}"
-        //         });
-        //     };
-        // }
+            oTable.bindColumns("/"+colBind, function (sId, oContext) {
+                var oColumn = oContext.getObject();
+                var oTemplate = this._getTemplate(smode, oColumn);
+                // Create a new column for the table with the specified properties
+                return new Column({
+                    label: oColumn.colProperty,
+                    template: oTemplate
+                });
+            }.bind(this));
+        },
+        _getTemplate: (sMode, oColumn ) => {
+            if (sMode === "display" || (sMode === "Edit" && oColumn.colProperty == "CustomerID")) {
+                return new sap.m.Text({
+                    text: "{" + oColumn.colProperty + "}",
+                    wrapping: true
+                });
+            } else if (sMode === "Edit" && oColumn.colProperty !== "CustomerID") {
+                return new sap.m.Input({
+                    value: "{" + oColumn.colProperty + "}"
+                });
+            };
+        },
     });
 });

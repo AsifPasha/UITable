@@ -6,8 +6,7 @@
     <headerContent>
     <Button id="idBtn" text="Customer List" press="onPressToOtherApp"/>
     </headerContent>
-    <content>
-           
+    <content>        
              <Panel id="idpaneledit" headerText="UI Table" expandable="true" expanded="false">
                 <ui:Table id="idtbleedit" rows="{ViewModel>/CustomersResults}" selectionMode="MultiToggle" paste="onPaste" ariaLabelledBy="title">
                     <ui:columns>
@@ -69,9 +68,7 @@
                     </ui:extension>
 
                 </ui:Table>
-            </Panel>
-            
-          
+            </Panel>         
     </content>
     </Page>
 </mvc:View>
